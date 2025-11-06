@@ -24,9 +24,7 @@ The app supports real-time task sharing and collaboration, offline usage, retry 
 
 ---
 
-## 🧩 Architecture (MVVM)
 ## 🔧 Setup Instructions
-
 ### 1️⃣ Install Dependencies
 ### 2️⃣ Configure Firebase
 ### 3️⃣ Run the App
@@ -55,10 +53,8 @@ This application demonstrates:
 - Riverpod for scalable state management
 - Realtime Firebase collaboration
 - Offline support with retry
-- Professional folder structure
 - Responsive, modern Material 3 UI
 
-It is production-ready and meets all assessment requirements.
 
 ---
 
