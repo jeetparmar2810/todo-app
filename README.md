@@ -26,30 +26,30 @@ The app supports real-time task sharing and collaboration, offline usage, retry 
 
 ## 🧩 Architecture (MVVM)
 
-lib/
-├── core/
-│   ├── constants/        # AppStrings, colors, labels
-│   ├── theme/            # Material 3 themes
-│   ├── utils/            # Validators, utility functions
-│   └── widgets/          # Reusable UI widgets
-├── models/
-│   └── task_model.dart
-├── services/
-│   ├── auth_service.dart
-│   ├── firestore_service.dart
-│   ├── connectivity_service.dart
-│   └── retry_service.dart
-├── viewmodels/
-│   ├── auth_viewmodel.dart
-│   └── task_viewmodel.dart
-├── views/
-│   ├── auth/ (login, register)
-│   └── home/ (task list, share, dialogs)
-├── routes/
-│   ├── app_routes.dart
-│   └── app_router.dart
-├── firebase_options.dart
-└── main.dart
+    lib/
+    ├── core/
+    │   ├── constants/        # AppStrings, colors, labels
+    │   ├── theme/            # Material 3 themes
+    │   ├── utils/            # Validators, utility functions
+    │   └── widgets/          # Reusable UI widgets
+    ├── models/
+    │   └── task_model.dart
+    ├── services/
+    │   ├── auth_service.dart
+    │   ├── firestore_service.dart
+    │   ├── connectivity_service.dart
+    │   └── retry_service.dart
+    ├── viewmodels/
+    │   ├── auth_viewmodel.dart
+    │   └── task_viewmodel.dart
+    ├── views/
+    │   ├── auth/ (login, register)
+    │   └── home/ (task list, share, dialogs)
+    ├── routes/
+    │   ├── app_routes.dart
+    │   └── app_router.dart
+    ├── firebase_options.dart
+    └── main.dart
 
 ---
 
