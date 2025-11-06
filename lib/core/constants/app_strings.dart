@@ -33,7 +33,7 @@ class AppStrings {
   static const String completed = "Completed";
   static const String delete = "Delete";
   static const String noRoute = "Route not found";
-  static const String google = "'google.com";
+  static const String googleDns = "8.8.8.8";
 
   static const String offlineMessage =
       "You are offline — changes will sync when back online";

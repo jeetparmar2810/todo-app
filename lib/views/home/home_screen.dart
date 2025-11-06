@@ -15,9 +15,32 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final taskVM = ref.watch(taskViewModelProvider);
 
-    final isOnline = ref
-        .watch(connectivityProvider)
-        .maybeWhen(data: (value) => value, orElse: () => true);
+    final isOnline = ref.watch(connectivityProvider).maybeWhen(
+      data: (value) => value,
+      orElse: () => true,
+    );
+
+    ref.listen(connectivityProvider, (previous, next) {
+      final online = next.value ?? false;
+
+      if (!online) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("No Internet Connection"),
+            backgroundColor: Colors.red,
+            duration: Duration(seconds: 2),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Back Online"),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(
@@ -95,9 +118,8 @@ class HomeScreen extends ConsumerWidget {
                       task.completed
                           ? Icons.check_circle
                           : Icons.circle_outlined,
-                      color: task.completed
-                          ? Colors.green
-                          : Colors.grey,
+                      color:
+                      task.completed ? Colors.green : Colors.grey,
                     ),
                   ),
                 );
@@ -187,21 +209,27 @@ class HomeScreen extends ConsumerWidget {
 
               if (enteredEmail.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text(AppStrings.enterEmailError)),
+                  const SnackBar(
+                    content: Text(AppStrings.enterEmailError),
+                  ),
                 );
                 return;
               }
               if (enteredEmail == currentUserEmail) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text(AppStrings.cannotShareWithSelf)),
+                  const SnackBar(
+                    content: Text(AppStrings.cannotShareWithSelf),
+                  ),
                 );
                 return;
               }
+
               await taskVM.shareTaskWithEmail(
                 context,
                 taskId,
                 enteredEmail,
               );
+
               if (context.mounted) Navigator.pop(context);
             },
           ),
