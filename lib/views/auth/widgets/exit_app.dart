@@ -25,7 +25,7 @@ class ExitAppSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          /// Drag handle
+
           Container(
             width: 40,
             height: 4,
@@ -37,7 +37,7 @@ class ExitAppSheet extends StatelessWidget {
 
           const SizedBox(height: 20),
 
-          /// Exit Icon
+
           Icon(
             Icons.exit_to_app_rounded,
             size: 60,
@@ -46,7 +46,7 @@ class ExitAppSheet extends StatelessWidget {
 
           const SizedBox(height: 16),
 
-          /// Title
+
           const Text(
             AppStrings.exitApp,
             style: TextStyle(
@@ -57,7 +57,6 @@ class ExitAppSheet extends StatelessWidget {
 
           const SizedBox(height: 10),
 
-          /// Subtitle
           const Text(
             AppStrings.exitAppConfirmation,
             textAlign: TextAlign.center,
@@ -69,7 +68,7 @@ class ExitAppSheet extends StatelessWidget {
 
           const SizedBox(height: 25),
 
-          /// Exit button
+
           SizedBox(
             width: double.infinity,
             child: CustomButton(
@@ -83,7 +82,6 @@ class ExitAppSheet extends StatelessWidget {
 
           const SizedBox(height: 10),
 
-          /// Cancel button
           SizedBox(
             width: double.infinity,
             child: TextButton(
