@@ -8,6 +8,7 @@ import '../services/firestore_service.dart';
 import '../services/share_service.dart';
 import '../models/task_model.dart';
 import '../core/utils/helpers.dart';
+import '../core/constants/app_strings.dart'; // Import AppStrings
 
 final taskViewModelProvider = ChangeNotifierProvider<TaskViewModel>((ref) {
   return TaskViewModel();
@@ -24,7 +25,6 @@ class TaskViewModel extends ChangeNotifier {
     if (user != null) _listen();
   }
 
-  /// ✅ Real-time listener
   void _listen() {
     _db.getTasks(user!.uid).listen((data) {
       tasks = data;
@@ -32,7 +32,6 @@ class TaskViewModel extends ChangeNotifier {
     });
   }
 
-  /// ✅ Add Task
   Future<void> addTask(BuildContext context, String title, String desc) async {
     if (user == null) return;
 
@@ -45,43 +44,40 @@ class TaskViewModel extends ChangeNotifier {
       title: title,
       description: desc,
       ownerId: user!.uid,
-      sharedWith: [user!.uid], // owner always included
+      sharedWith: [user!.uid],
       completed: false,
       createdAt: Timestamp.now(),
     );
 
     try {
       await _db.addTask(task);
-      showSnack(context, 'Task added');
+      showSnack(context, AppStrings.taskAdded);
     } catch (e) {
-      showSnack(context, 'Add failed: $e');
+      showSnack(context, '${AppStrings.taskAddFailed}: $e');
     } finally {
       loading = false;
       notifyListeners();
     }
   }
 
-  /// ✅ Update task
   Future<void> updateTask(BuildContext context, TaskModel task) async {
     try {
       await _db.updateTask(task);
-      showSnack(context, 'Task updated');
+      showSnack(context, AppStrings.taskUpdated);
     } catch (e) {
-      showSnack(context, 'Update failed: $e');
+      showSnack(context, '${AppStrings.taskUpdateFailed}: $e');
     }
   }
 
-  /// ✅ Delete task
   Future<void> deleteTask(BuildContext context, String id) async {
     try {
       await _db.deleteTask(id);
-      showSnack(context, 'Task deleted');
+      showSnack(context, AppStrings.taskDeleted);
     } catch (e) {
-      showSnack(context, 'Delete failed: $e');
+      showSnack(context, '${AppStrings.taskDeleteFailed}: $e');
     }
   }
 
-  /// ✅ Toggle completed
   Future<void> toggleComplete(
       BuildContext context,
       String taskId,
@@ -90,24 +86,27 @@ class TaskViewModel extends ChangeNotifier {
     try {
       await _db.toggleTaskComplete(taskId, newStatus);
       showSnack(
-          context, newStatus ? "Marked as completed" : "Marked as incomplete");
+        context,
+        newStatus ? AppStrings.taskMarkedComplete : AppStrings.taskMarkedIncomplete,
+      );
     } catch (e) {
-      showSnack(context, 'Failed to update: $e');
+      showSnack(context, '${AppStrings.taskToggleFailed}: $e');
     }
   }
 
-  /// ✅ Share task with another user via email
   Future<void> shareTaskWithEmail(
-      BuildContext context, String taskId, String email) async {
+      BuildContext context,
+      String taskId,
+      String email,
+      ) async {
     try {
       await _db.shareTask(taskId, email);
-      showSnack(context, 'Shared successfully');
+      showSnack(context, AppStrings.taskShared);
     } catch (e) {
-      showSnack(context, 'Share failed: $e');
+      showSnack(context, '${AppStrings.taskShareFailed}: $e');
     }
   }
 
-  /// ✅ External share (WhatsApp, etc.)
   Future<void> shareExternally(TaskModel task) async {
     await ShareService.shareTask(task);
   }

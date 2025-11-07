@@ -16,7 +16,6 @@ class AuthViewModel extends ChangeNotifier {
   User? get currentUser => _auth.currentUser;
   Stream<User?> authStateChanges() => _auth.authStateChanges();
 
-  // ✅ SIGN IN
   Future<bool> signIn(BuildContext context, String email, String password) async {
     try {
       loading = true;
@@ -53,7 +52,6 @@ class AuthViewModel extends ChangeNotifier {
     }
   }
 
-  // ✅ SIGN UP — FIXED ✅ ALWAYS RETURNS true/false
   Future<bool> signUp(BuildContext context, String email, String password) async {
     try {
       loading = true;

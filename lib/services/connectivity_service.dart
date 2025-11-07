@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_app_jitendra/core/constants/app_strings.dart';
 
 class ConnectivityService {
   final Connectivity _connectivity = Connectivity();
@@ -13,7 +14,7 @@ class ConnectivityService {
         return false;
       }
 
-      final result = await InternetAddress.lookup('google.com')
+      final result = await InternetAddress.lookup(AppStrings.googleDns)
           .timeout(const Duration(seconds: 5));
 
       return result.isNotEmpty && result.first.rawAddress.isNotEmpty;

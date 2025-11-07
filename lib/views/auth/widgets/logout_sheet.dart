@@ -17,8 +17,6 @@ class LogoutSheet extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const SizedBox(height: 8),
-
-        /// Title
         const Text(
           AppStrings.logoutTooltip,
           style: TextStyle(
@@ -28,8 +26,6 @@ class LogoutSheet extends StatelessWidget {
         ),
 
         const SizedBox(height: 10),
-
-        /// Subtitle
         const Text(
           AppStrings.logoutMsg,
           textAlign: TextAlign.center,
@@ -41,7 +37,6 @@ class LogoutSheet extends StatelessWidget {
 
         const SizedBox(height: 25),
 
-        /// Logout button
         CustomButton(
           text: AppStrings.logoutTooltip,
           onPressed: onConfirm,

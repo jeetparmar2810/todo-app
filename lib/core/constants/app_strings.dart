@@ -71,4 +71,25 @@ class AppStrings {
   static const String markIncomplete = "Mark Incomplete";
   static const String editTask = "Edit Task";
 
+
+  static const String taskAdded = 'Task added successfully';
+  static const String taskUpdated = 'Task updated successfully';
+  static const String taskDeleted = 'Task deleted successfully';
+  static const String taskMarkedComplete = 'Marked as completed';
+  static const String taskMarkedIncomplete = 'Marked as incomplete';
+  static const String taskShared = 'Task shared successfully';
+
+  static const String taskAddFailed = 'Failed to add task';
+  static const String taskUpdateFailed = 'Failed to update task';
+  static const String taskDeleteFailed = 'Failed to delete task';
+  static const String taskToggleFailed = 'Failed to update status';
+  static const String taskShareFailed = 'Failed to share task';
+
+  static const String deleteTask = 'Delete Task?';
+  static const String deleteTaskConfirmation = 'Are you sure you want to delete this task?';
+
+  static const String exitApp = 'Exit App';
+  static const String exitAppConfirmation = 'Are you sure you want to exit the app?';
+  static const String exit = 'Exit';
+
 }

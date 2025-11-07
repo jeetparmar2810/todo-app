@@ -11,7 +11,8 @@ void showDeleteConfirmSheet(BuildContext context, WidgetRef ref, String taskId) 
     isScrollControlled: true,
     backgroundColor: Colors.white,
     shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
     context: context,
     builder: (_) => Padding(
       padding: EdgeInsets.only(
@@ -23,47 +24,100 @@ void showDeleteConfirmSheet(BuildContext context, WidgetRef ref, String taskId) 
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.warning_amber_rounded,
-              size: 55, color: Colors.redAccent),
 
-          const SizedBox(height: 10),
+          Container(
+            width: 40,
+            height: 4,
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
 
-          const Text(
-            "Delete Task?",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          const SizedBox(height: 20),
+
+
+          const Icon(
+            Icons.warning_amber_rounded,
+            size: 55,
+            color: Colors.redAccent,
           ),
 
           const SizedBox(height: 10),
 
+
           const Text(
-            "Are you sure you want to delete this task?",
+            AppStrings.deleteTask,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
+          const SizedBox(height: 10),
+
+
+          const Text(
+            AppStrings.deleteTaskConfirmation,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 15, color: Colors.black54),
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.black54,
+            ),
           ),
 
           const SizedBox(height: 25),
 
+
           Row(
             children: [
+
               Expanded(
                 child: OutlinedButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text(AppStrings.cancel),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    side: BorderSide(color: Colors.grey[400]!),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text(
+                    AppStrings.cancel,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black87,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                   onPressed: () async {
+                    Navigator.pop(context); // Close bottom sheet first
                     await taskVM.deleteTask(context, taskId);
-                    Navigator.pop(context);
                   },
-                  child: Text(AppStrings.delete,style: TextStyle(color: AppColors.secondary),),
+                  child: Text(
+                    AppStrings.delete,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColors.secondary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
               ),
             ],
           ),
+          const SizedBox(height: 10),
         ],
       ),
     ),

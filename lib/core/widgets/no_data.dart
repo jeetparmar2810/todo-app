@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app_jitendra/core/constants/app_strings.dart';
 import '../theme/app_colors.dart';
 
 class NoDataWidget extends StatelessWidget {
@@ -44,7 +45,7 @@ class NoDataWidget extends StatelessWidget {
               TextButton.icon(
                 onPressed: onRetry,
                 icon: const Icon(Icons.refresh, size: 16),
-                label: const Text("Retry"),
+                label: const Text(AppStrings.retry),
                 style: TextButton.styleFrom(
                   foregroundColor: AppColors.primary,
                 ),

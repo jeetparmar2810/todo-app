@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constants/app_dimens.dart';
 import '../../core/constants/app_strings.dart';
+import '../../core/widgets/network_error_snackbar.dart';
+import '../../services/connectivity_service.dart';
 import '../../viewmodels/auth_viewmodel.dart';
 import '../../core/widgets/custom_button.dart';
 import '../../core/widgets/custom_input_field.dart';
@@ -54,7 +56,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             children: [
               const SizedBox(height: 20),
 
-              // ✅ Icon / Branding
               Icon(
                 Icons.check_circle,
                 size: 90,
@@ -63,7 +64,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
               const SizedBox(height: AppDimens.space24),
 
-              // ✅ Title
               Text(
                 AppStrings.registerTitle,
                 style: TextStyle(
@@ -76,7 +76,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
               const SizedBox(height: AppDimens.space32),
 
-              // ✅ Email
               CustomInputField(
                 label: AppStrings.email,
                 controller: emailCtrl,
@@ -85,7 +84,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               ),
               const SizedBox(height: AppDimens.space16),
 
-              // ✅ Password
+
               CustomInputField(
                 label: AppStrings.password,
                 controller: passwordCtrl,
@@ -95,7 +94,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               ),
               const SizedBox(height: AppDimens.space16),
 
-              // ✅ Confirm Password
+
               CustomInputField(
                 label: AppStrings.confirmPassword,
                 controller: confirmPassCtrl,
@@ -114,36 +113,20 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
               const SizedBox(height: AppDimens.space24),
 
-              // ✅ Register Button
+
               SizedBox(
                 width: double.infinity,
                 height: AppDimens.buttonHeight,
                 child: CustomButton(
                   text: AppStrings.registerButton,
                   loading: authVM.loading,
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      await authVM.signUp(
-                        context,
-                        emailCtrl.text.trim(),
-                        passwordCtrl.text.trim(),
-                      );
-
-                      if (!mounted) return;
-
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        AppRoutes.login,
-                            (_) => false,
-                      );
-                    }
-                  },
+                  onPressed: _handleRegister
                 ),
               ),
 
               const SizedBox(height: AppDimens.space24),
 
-              // ✅ Already Account? Login
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -182,4 +165,36 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       ),
     );
   }
+
+  Future<void> _handleRegister() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    final connectivityService = ref.read(connectivityServiceProvider);
+    final hasInternet = await connectivityService.hasInternetConnection();
+
+    if (!hasInternet) {
+      if (!mounted) return;
+
+      NetworkError.show(
+        context: context,
+        onRetry: _handleRegister,
+      );
+      return;
+    }
+    final authVM = ref.read(authViewModelProvider);
+
+    await authVM.signUp(
+        context,
+        emailCtrl.text.trim(),
+        passwordCtrl.text.trim(),
+      );
+
+      if (!mounted) return;
+
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        AppRoutes.login,
+            (_) => false,
+      );
+    }
 }

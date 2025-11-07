@@ -15,7 +15,7 @@ class FirestoreService {
         snapshot.docs.map((doc) => TaskModel.fromDoc(doc)).toList());
   }
 
-  /// ✅ Add Task
+
   Future<void> addTask(TaskModel task) async {
     final ref = _db.collection('tasks').doc(task.id);
 
@@ -27,7 +27,6 @@ class FirestoreService {
     }
   }
 
-  /// ✅ Update Task
   Future<void> updateTask(TaskModel task) async {
     final ref = _db.collection('tasks').doc(task.id);
 
@@ -39,7 +38,6 @@ class FirestoreService {
     }
   }
 
-  /// ✅ Delete Task
   Future<void> deleteTask(String id) async {
     final ref = _db.collection('tasks').doc(id);
 
@@ -51,7 +49,6 @@ class FirestoreService {
     }
   }
 
-  /// ✅ Toggle Complete
   Future<void> toggleTaskComplete(String taskId, bool status) async {
     final ref = _db.collection('tasks').doc(taskId);
 
@@ -63,10 +60,8 @@ class FirestoreService {
     }
   }
 
-  /// ✅ Share with another user
   Future<void> shareTask(String taskId, String email) async {
     try {
-      // ✅ Find user by email
       final users = await _db
           .collection('users')
           .where('email', isEqualTo: email)
@@ -79,7 +74,6 @@ class FirestoreService {
 
       final userId = users.docs.first.id;
 
-      // ✅ Add userId to sharedWith array
       await _db.collection('tasks').doc(taskId).update({
         "sharedWith": FieldValue.arrayUnion([userId]),
       });
@@ -99,7 +93,6 @@ class FirestoreService {
           });
         }
       });
-
       rethrow;
     }
   }
