@@ -33,21 +33,16 @@ The app supports real-time task sharing and collaboration, offline usage, retry 
   <img src="assets/screenshots/register.png" alt="Register Login" width="30%" /> 
 </div>
 <div align="center">
-  <img src="assets/screenshots/task.png" alt="Payment History" width="30%" />
-  <img src="assets/screenshots/pay_maintenance.png" alt="Pay Maintenance" width="30%" />
-  <img src="assets/screenshots/receipt_download.png" alt="Receipt Download" width="30%" />
+  <img src="assets/screenshots/task.png" alt="Tasks" width="30%" />
+  <img src="assets/screenshots/task-list.png" alt="Task List" width="30%" />
+  <img src="assets/screenshots/mask-task-options.png" alt="Options Menu" width="30%" />
 </div>
 <div align="center">
-  <img src="assets/screenshots/admin_login.png" alt="Admin Login" width="30%" />
-  <img src="assets/screenshots/admin_dashboard.png" alt="Admin Dashboard" width="30%" />
-  <img src="assets/screenshots/drawer.png" alt="Drawer Menu" width="30%" />
+  <img src="assets/screenshots/add-task.png" alt="Add Task" width="30%" />
+  <img src="assets/screenshots/edit-task.png" alt="Edit Task" width="30%" />
+  <img src="assets/screenshots/delete-task.png" alt="Delete Task" width="30%" />
 </div>
 
-<div align="center">
-  <img src="assets/screenshots/request.png" alt="Request" width="30%" />
-  <img src="assets/screenshots/setting.png" alt="Setting" width="30%" />
-  <img src="assets/screenshots/logout.png" alt="Logout" width="30%" />
-</div>
 
 
 ---
