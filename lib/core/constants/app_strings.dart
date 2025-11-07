@@ -16,7 +16,6 @@ class AppStrings {
   static const String addNewTask = "Add New Task";
 
   static const String loginButton = "Login";
-  static const String dontHaveAccount = "Don't have an account? Register";
   static const String confirmPassword = "Confirm Password";
   static const String registerButton = "Create Account";
   static const String alreadyAccount = "Already have an account? Login";
@@ -25,6 +24,7 @@ class AppStrings {
   static const String emailInvalid = "Enter a valid email address";
   static const String passwordRequired = "Password is required";
   static const String passwordShort = "Password must be at least 6 characters";
+  static const String passwordNotMatch = "Passwords do not match";
   static const String fieldRequired = "Field required";
 
   static const String noTasks = "No tasks yet";
@@ -34,14 +34,16 @@ class AppStrings {
   static const String delete = "Delete";
   static const String noRoute = "Route not found";
   static const String googleDns = "8.8.8.8";
-
+  static const String registerSuccess = "Account created successfully!";
   static const String offlineMessage =
       "You are offline — changes will sync when back online";
 
-  static const String alreadyHaveAccount = 'Already have an account? Login';
+  static const String alreadyHaveAccount = 'Already have an account?';
 
   static const String fabTooltip = "Add a new task";
   static const String logoutTooltip = "Logout";
+  static const String emailAlreadyUsed = "This email is already registered";
+  static const String registrationFailed = "Registration failed. Try again.";
 
   static const String shareTaskTitle = "Share Task";
   static const String shareEmailHint = "Enter email to share with";
@@ -49,4 +51,24 @@ class AppStrings {
   static const String cannotShareWithSelf =
       "You cannot share a task with yourself";
   static const String enterEmailError = "Please enter an email";
+
+  static const String loginSubtitle = "Welcome back! Login to continue";
+
+  static const String dontHaveAccountOnly = "Don't have an account?";
+
+  static const String noInternetConnection = 'No internet connection';
+  static const String retry = 'Retry';
+  static const String somethingWentWrong =
+      'Something went wrong. Please try again.';
+
+  static const String userNotFound = "No account found with this email";
+  static const String wrongPassword = "Incorrect password, please try again";
+  static const String invalidCredentials = "Invalid login credentials";
+  static const String defaultError = "Login failed. Please check your details.";
+
+  static const String taskActionsTitle = "Task Actions";
+  static const String markComplete = "Mark Complete";
+  static const String markIncomplete = "Mark Incomplete";
+  static const String editTask = "Edit Task";
+
 }

@@ -24,6 +24,34 @@ The app supports real-time task sharing and collaboration, offline usage, retry 
 
 ---
 
+
+## 📱 Screenshots
+
+<div align="center">
+  <img src="assets/screenshots/splash.png" alt="Splash Screen" width="30%" />
+  <img src="assets/screenshots/login.png" alt="Login Screen" width="30%" />
+  <img src="assets/screenshots/register.png" alt="Register Login" width="30%" /> 
+</div>
+<div align="center">
+  <img src="assets/screenshots/task.png" alt="Payment History" width="30%" />
+  <img src="assets/screenshots/pay_maintenance.png" alt="Pay Maintenance" width="30%" />
+  <img src="assets/screenshots/receipt_download.png" alt="Receipt Download" width="30%" />
+</div>
+<div align="center">
+  <img src="assets/screenshots/admin_login.png" alt="Admin Login" width="30%" />
+  <img src="assets/screenshots/admin_dashboard.png" alt="Admin Dashboard" width="30%" />
+  <img src="assets/screenshots/drawer.png" alt="Drawer Menu" width="30%" />
+</div>
+
+<div align="center">
+  <img src="assets/screenshots/request.png" alt="Request" width="30%" />
+  <img src="assets/screenshots/setting.png" alt="Setting" width="30%" />
+  <img src="assets/screenshots/logout.png" alt="Logout" width="30%" />
+</div>
+
+
+---
+
 ## 🔧 Setup Instructions
 ### 1️⃣ Install Dependencies
 ### 2️⃣ Configure Firebase

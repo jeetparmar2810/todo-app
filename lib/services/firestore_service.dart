@@ -11,75 +11,95 @@ class FirestoreService {
         .collection('tasks')
         .where('sharedWith', arrayContains: userId)
         .snapshots()
-        .map(
-          (snapshot) => snapshot.docs.map((d) => TaskModel.fromDoc(d)).toList(),
-    );
+        .map((snapshot) =>
+        snapshot.docs.map((doc) => TaskModel.fromDoc(doc)).toList());
   }
 
+  /// ✅ Add Task
   Future<void> addTask(TaskModel task) async {
+    final ref = _db.collection('tasks').doc(task.id);
+
     try {
-      await _db.collection('tasks').doc(task.id).set(task.toMap());
+      await ref.set(task.toMap());
     } catch (e) {
-      RetryService.instance.enqueue(() async {
-        await _db.collection('tasks').doc(task.id).set(task.toMap());
-      });
+      RetryService.instance.enqueue(() => ref.set(task.toMap()));
       rethrow;
     }
   }
 
+  /// ✅ Update Task
   Future<void> updateTask(TaskModel task) async {
+    final ref = _db.collection('tasks').doc(task.id);
+
     try {
-      await _db.collection('tasks').doc(task.id).update(task.toMap());
+      await ref.update(task.toMap());
     } catch (e) {
-      RetryService.instance.enqueue(() async {
-        await _db.collection('tasks').doc(task.id).update(task.toMap());
-      });
+      RetryService.instance.enqueue(() => ref.update(task.toMap()));
       rethrow;
     }
   }
 
+  /// ✅ Delete Task
   Future<void> deleteTask(String id) async {
+    final ref = _db.collection('tasks').doc(id);
+
     try {
-      await _db.collection('tasks').doc(id).delete();
+      await ref.delete();
     } catch (e) {
-      RetryService.instance.enqueue(() async {
-        await _db.collection('tasks').doc(id).delete();
-      });
+      RetryService.instance.enqueue(() => ref.delete());
       rethrow;
     }
   }
 
+  /// ✅ Toggle Complete
+  Future<void> toggleTaskComplete(String taskId, bool status) async {
+    final ref = _db.collection('tasks').doc(taskId);
+
+    try {
+      await ref.update({"completed": status});
+    } catch (e) {
+      RetryService.instance.enqueue(() => ref.update({"completed": status}));
+      rethrow;
+    }
+  }
+
+  /// ✅ Share with another user
   Future<void> shareTask(String taskId, String email) async {
     try {
+      // ✅ Find user by email
       final users = await _db
           .collection('users')
           .where('email', isEqualTo: email)
+          .limit(1)
           .get();
 
       if (users.docs.isEmpty) {
-        throw Exception('User not found');
+        throw Exception("User with email '$email' not found");
       }
 
       final userId = users.docs.first.id;
 
+      // ✅ Add userId to sharedWith array
       await _db.collection('tasks').doc(taskId).update({
-        'sharedWith': FieldValue.arrayUnion([userId]),
+        "sharedWith": FieldValue.arrayUnion([userId]),
       });
     } catch (e) {
       RetryService.instance.enqueue(() async {
         final users = await _db
             .collection('users')
             .where('email', isEqualTo: email)
+            .limit(1)
             .get();
 
         if (users.docs.isNotEmpty) {
           final userId = users.docs.first.id;
 
           await _db.collection('tasks').doc(taskId).update({
-            'sharedWith': FieldValue.arrayUnion([userId]),
+            "sharedWith": FieldValue.arrayUnion([userId]),
           });
         }
       });
+
       rethrow;
     }
   }

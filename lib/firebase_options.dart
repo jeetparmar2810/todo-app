@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'todoapp-bc651.firebasestorage.app',
     measurementId: 'G-MQDXTS22HG',
   );
+
 }
